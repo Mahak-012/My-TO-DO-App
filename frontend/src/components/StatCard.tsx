@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import { useTheme } from "../context/ThemeContext";
-import { spacing, fontSize, fontWeight } from "../constants/theme";
+import { spacing, fontSize, fontWeight, radii } from "../constants/theme";
 
 interface Props {
   label: string;
@@ -30,7 +30,8 @@ export const StatCard: React.FC<Props> = ({ label, value, accent, delay = 0, tes
           styles.value,
           {
             color: accent || colors.textPrimary,
-            fontSize: big ? 64 : 40,
+            fontSize: big ? 48 : 30,
+            lineHeight: big ? 50 : 34,
           },
         ]}
       >
@@ -44,17 +45,17 @@ const styles = StyleSheet.create({
   card: {
     borderWidth: 1,
     padding: spacing.md,
-    minHeight: 110,
+    minHeight: 96,
     justifyContent: "space-between",
+    borderRadius: radii.lg,
   },
   label: {
-    fontSize: 10,
-    letterSpacing: 2,
-    fontWeight: "700",
+    fontSize: 11,
+    letterSpacing: 0.4,
+    fontWeight: "600",
   },
   value: {
     fontWeight: fontWeight.black,
-    letterSpacing: -2,
-    lineHeight: 64,
+    letterSpacing: -1.2,
   },
 });

@@ -14,7 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useTasks } from "../../src/context/TaskContext";
-import { spacing, fontSize, fontWeight } from "../../src/constants/theme";
+import { spacing, fontSize, fontWeight, radii } from "../../src/constants/theme";
 
 const confirmAction = (title: string, message: string, onYes: () => void) => {
   if (Platform.OS === "web") {
@@ -47,7 +47,7 @@ export default function SettingsScreen() {
           entering={FadeInUp.delay(100).duration(380)}
           style={[styles.card, { borderColor: colors.border, backgroundColor: colors.surface }]}
         >
-          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>APPEARANCE</Text>
+          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>Appearance</Text>
           <View style={styles.themeRow}>
             {(["light", "dark"] as const).map((m) => {
               const active = mode === m;
@@ -75,7 +75,7 @@ export default function SettingsScreen() {
                       { color: active ? colors.background : colors.textPrimary },
                     ]}
                   >
-                    {m.toUpperCase()}
+                    {m === "light" ? "Light" : "Dark"}
                   </Text>
                 </TouchableOpacity>
               );
@@ -88,7 +88,7 @@ export default function SettingsScreen() {
           entering={FadeInUp.delay(180).duration(380)}
           style={[styles.card, { borderColor: colors.border, backgroundColor: colors.surface }]}
         >
-          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>ABOUT</Text>
+          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>About</Text>
           <Text style={[styles.aboutTitle, { color: colors.textPrimary }]}>
             Tasks · A portfolio piece
           </Text>
@@ -98,15 +98,15 @@ export default function SettingsScreen() {
           </Text>
           <View style={[styles.metaRow, { borderTopColor: colors.borderSoft }]}>
             <View style={styles.metaCell}>
-              <Text style={[styles.metaLabel, { color: colors.textSecondary }]}>TASKS</Text>
+              <Text style={[styles.metaLabel, { color: colors.textSecondary }]}>Tasks</Text>
               <Text style={[styles.metaVal, { color: colors.textPrimary }]}>{tasks.length}</Text>
             </View>
             <View style={[styles.metaCell, { borderLeftColor: colors.borderSoft, borderLeftWidth: 1 }]}>
-              <Text style={[styles.metaLabel, { color: colors.textSecondary }]}>STORAGE</Text>
-              <Text style={[styles.metaVal, { color: colors.textPrimary }]}>LOCAL</Text>
+              <Text style={[styles.metaLabel, { color: colors.textSecondary }]}>Storage</Text>
+              <Text style={[styles.metaVal, { color: colors.textPrimary }]}>Local</Text>
             </View>
             <View style={[styles.metaCell, { borderLeftColor: colors.borderSoft, borderLeftWidth: 1 }]}>
-              <Text style={[styles.metaLabel, { color: colors.textSecondary }]}>VERSION</Text>
+              <Text style={[styles.metaLabel, { color: colors.textSecondary }]}>Version</Text>
               <Text style={[styles.metaVal, { color: colors.textPrimary }]}>1.0.0</Text>
             </View>
           </View>
@@ -117,7 +117,7 @@ export default function SettingsScreen() {
           entering={FadeInUp.delay(240).duration(380)}
           style={[styles.card, { borderColor: colors.priorityHigh, backgroundColor: colors.surface }]}
         >
-          <Text style={[styles.fieldLabel, { color: colors.priorityHigh }]}>DANGER ZONE</Text>
+          <Text style={[styles.fieldLabel, { color: colors.priorityHigh }]}>Danger zone</Text>
           <Text style={[styles.aboutText, { color: colors.textSecondary, marginTop: 4 }]}>
             This will permanently delete every task on this device.
           </Text>
@@ -136,7 +136,7 @@ export default function SettingsScreen() {
             testID="clear-all-btn"
           >
             <Ionicons name="trash-outline" size={16} color="#FFFFFF" />
-            <Text style={styles.dangerText}>CLEAR ALL TASKS</Text>
+            <Text style={styles.dangerText}>Clear all tasks</Text>
           </TouchableOpacity>
         </Animated.View>
 
@@ -149,10 +149,10 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   safe: { flex: 1 },
   scroll: { padding: spacing.lg, gap: spacing.md, paddingBottom: 100 },
-  eyebrow: { fontSize: 10, letterSpacing: 2, fontWeight: "700", marginBottom: 4 },
-  title: { fontSize: 44, fontWeight: fontWeight.black, letterSpacing: -2, lineHeight: 46 },
-  card: { borderWidth: 1, padding: spacing.md, marginTop: spacing.md },
-  fieldLabel: { fontSize: 10, letterSpacing: 2, fontWeight: "700", marginBottom: 12 },
+  eyebrow: { fontSize: 11, letterSpacing: 0.4, fontWeight: "600", marginBottom: 4 },
+  title: { fontSize: 30, fontWeight: fontWeight.black, letterSpacing: -0.8, lineHeight: 34 },
+  card: { borderWidth: 1, padding: spacing.md, marginTop: spacing.md, borderRadius: radii.lg },
+  fieldLabel: { fontSize: 11, letterSpacing: 0.4, fontWeight: "600", marginBottom: 12 },
   themeRow: { flexDirection: "row", gap: 8 },
   themeOption: {
     flex: 1,
@@ -162,12 +162,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     gap: 8,
+    borderRadius: radii.md,
   },
-  themeText: { fontSize: 12, fontWeight: "800", letterSpacing: 1.5 },
+  themeText: { fontSize: 12, fontWeight: "700", letterSpacing: 0.4 },
   aboutTitle: {
-    fontSize: 22,
-    fontWeight: "800",
-    letterSpacing: -0.8,
+    fontSize: 18,
+    fontWeight: "700",
+    letterSpacing: -0.4,
     marginBottom: 8,
   },
   aboutText: { fontSize: fontSize.sm, lineHeight: 20 },
@@ -182,12 +183,13 @@ const styles = StyleSheet.create({
   metaVal: { fontSize: 18, fontWeight: "800", marginTop: 4, letterSpacing: -0.5 },
   dangerBtn: {
     marginTop: 14,
-    borderWidth: 1,
+    borderWidth: 0,
     paddingVertical: 14,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
+    borderRadius: radii.md,
   },
-  dangerText: { color: "#FFFFFF", fontSize: 12, fontWeight: "800", letterSpacing: 1.5 },
+  dangerText: { color: "#FFFFFF", fontSize: 12, fontWeight: "700", letterSpacing: 0.4 },
 });

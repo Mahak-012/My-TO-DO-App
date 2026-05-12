@@ -17,7 +17,7 @@ import { StatCard } from "../../src/components/StatCard";
 import { TaskItem } from "../../src/components/TaskItem";
 import { AddTaskModal } from "../../src/components/AddTaskModal";
 import { EmptyState } from "../../src/components/EmptyState";
-import { spacing, fontSize, fontWeight } from "../../src/constants/theme";
+import { spacing, fontSize, fontWeight, radii } from "../../src/constants/theme";
 
 export default function DashboardScreen() {
   const { colors, mode, toggleTheme } = useTheme();
@@ -63,7 +63,7 @@ export default function DashboardScreen() {
         <Animated.View entering={FadeInDown.duration(380)} style={styles.header}>
           <View style={{ flex: 1 }}>
             <Text style={[styles.eyebrow, { color: colors.textSecondary }]}>
-              {today.toUpperCase()}
+              {today}
             </Text>
             <Text style={[styles.title, { color: colors.textPrimary }]}>
               {stats.pending > 0 ? `${stats.pending} tasks` : "All clear."}
@@ -90,7 +90,7 @@ export default function DashboardScreen() {
         {/* Hero stat */}
         <View style={[styles.row, { gap: spacing.sm }]}>
           <StatCard
-            label="COMPLETION"
+            label="Completion"
             value={`${stats.pct}%`}
             accent={colors.accentPrimary}
             big
@@ -98,15 +98,15 @@ export default function DashboardScreen() {
             testID="stat-completion"
           />
           <View style={{ flex: 1, gap: spacing.sm }}>
-            <StatCard label="TOTAL" value={stats.total} delay={120} testID="stat-total" />
-            <StatCard label="DONE" value={stats.done} delay={180} testID="stat-done" />
+            <StatCard label="Total" value={stats.total} delay={120} testID="stat-total" />
+            <StatCard label="Done" value={stats.done} delay={180} testID="stat-done" />
           </View>
         </View>
 
         <View style={[styles.row, { gap: spacing.sm }]}>
-          <StatCard label="PENDING" value={stats.pending} delay={240} testID="stat-pending" />
+          <StatCard label="Pending" value={stats.pending} delay={240} testID="stat-pending" />
           <StatCard
-            label="HIGH PRIORITY"
+            label="High priority"
             value={stats.high}
             accent={colors.priorityHigh}
             delay={300}
@@ -123,15 +123,15 @@ export default function DashboardScreen() {
           ]}
           testID="dashboard-add-task-btn"
         >
-          <Ionicons name="add" size={22} color="#FFFFFF" />
-          <Text style={styles.ctaText}>NEW TASK</Text>
+          <Ionicons name="add" size={20} color="#FFFFFF" />
+          <Text style={styles.ctaText}>New task</Text>
         </TouchableOpacity>
 
         {/* Recent tasks */}
         <View style={styles.sectionHeader}>
-          <Text style={[styles.sectionTitle, { color: colors.textPrimary }]}>RECENT</Text>
+          <Text style={[styles.sectionTitle, { color: colors.textPrimary }]}>Recent</Text>
           <TouchableOpacity onPress={() => router.push("/(tabs)/tasks")} testID="view-all-btn">
-            <Text style={[styles.sectionLink, { color: colors.accentPrimary }]}>VIEW ALL →</Text>
+            <Text style={[styles.sectionLink, { color: colors.accentPrimary }]}>View all →</Text>
           </TouchableOpacity>
         </View>
 
@@ -139,7 +139,7 @@ export default function DashboardScreen() {
           <EmptyState
             icon="rocket-outline"
             title="Start your first task"
-            subtitle="Tap NEW TASK to add something to your list. Everything is saved locally on your device."
+            subtitle="Tap the New task button to add something to your list. Everything is saved locally on your device."
           />
         ) : (
           <View>
@@ -167,43 +167,45 @@ const styles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   eyebrow: {
-    fontSize: 10,
-    letterSpacing: 2,
-    fontWeight: "700",
+    fontSize: 11,
+    letterSpacing: 0.4,
+    fontWeight: "600",
     marginBottom: 6,
   },
   title: {
-    fontSize: 44,
+    fontSize: 30,
     fontWeight: fontWeight.black,
-    letterSpacing: -2,
-    lineHeight: 46,
+    letterSpacing: -0.8,
+    lineHeight: 34,
   },
   subtitle: {
     marginTop: 6,
     fontSize: fontSize.sm,
   },
   themeBtn: {
-    width: 44,
-    height: 44,
+    width: 40,
+    height: 40,
     borderWidth: 1,
+    borderRadius: radii.md,
     alignItems: "center",
     justifyContent: "center",
   },
   row: { flexDirection: "row" },
   cta: {
-    borderWidth: 1,
+    borderWidth: 0,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 16,
+    paddingVertical: 14,
     gap: 8,
     marginTop: spacing.sm,
+    borderRadius: radii.md,
   },
   ctaText: {
     color: "#FFFFFF",
     fontSize: 13,
-    fontWeight: "800",
-    letterSpacing: 1.5,
+    fontWeight: "700",
+    letterSpacing: 0.6,
   },
   sectionHeader: {
     flexDirection: "row",
@@ -214,12 +216,12 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 13,
-    letterSpacing: 2,
+    letterSpacing: 0.2,
     fontWeight: "700",
   },
   sectionLink: {
-    fontSize: 11,
-    letterSpacing: 1.5,
-    fontWeight: "700",
+    fontSize: 12,
+    letterSpacing: 0.2,
+    fontWeight: "600",
   },
 });

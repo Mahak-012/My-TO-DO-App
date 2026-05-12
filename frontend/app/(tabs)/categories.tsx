@@ -14,7 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Animated, { FadeInDown, FadeIn, Layout } from "react-native-reanimated";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useTasks } from "../../src/context/TaskContext";
-import { spacing, fontSize, fontWeight } from "../../src/constants/theme";
+import { spacing, fontSize, fontWeight, radii } from "../../src/constants/theme";
 
 const COLOR_OPTIONS = [
   "#FF3B30",
@@ -179,7 +179,7 @@ export default function CategoriesScreen() {
                 <View style={{ flex: 1, paddingVertical: spacing.md, paddingHorizontal: spacing.md }}>
                   <Text style={[styles.catName, { color: colors.textPrimary }]}>{c.name}</Text>
                   <Text style={[styles.catMeta, { color: colors.textSecondary }]}>
-                    {stat.total} TASKS · {stat.done} DONE · {pct}%
+                    {stat.total} tasks · {stat.done} done · {pct}%
                   </Text>
                   {/* progress bar */}
                   <View style={[styles.barBg, { backgroundColor: colors.borderSoft }]}>
@@ -230,18 +230,19 @@ export default function CategoriesScreen() {
 const styles = StyleSheet.create({
   safe: { flex: 1 },
   scroll: { padding: spacing.lg, gap: spacing.md, paddingBottom: 100 },
-  eyebrow: { fontSize: 10, letterSpacing: 2, fontWeight: "700", marginBottom: 4 },
-  title: { fontSize: 44, fontWeight: fontWeight.black, letterSpacing: -2, lineHeight: 46 },
+  eyebrow: { fontSize: 11, letterSpacing: 0.4, fontWeight: "600", marginBottom: 4 },
+  title: { fontSize: 30, fontWeight: fontWeight.black, letterSpacing: -0.8, lineHeight: 34 },
   subtitle: { marginTop: 6, fontSize: fontSize.sm },
   card: {
     borderWidth: 1,
     padding: spacing.md,
     marginTop: spacing.md,
+    borderRadius: radii.lg,
   },
   fieldLabel: {
-    fontSize: 10,
-    letterSpacing: 2,
-    fontWeight: "700",
+    fontSize: 11,
+    letterSpacing: 0.4,
+    fontWeight: "600",
     marginBottom: 8,
   },
   input: {
@@ -249,35 +250,38 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 12,
     fontSize: fontSize.md,
+    borderRadius: radii.md,
   },
   colorRow: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
   },
-  swatch: { width: 28, height: 28 },
+  swatch: { width: 28, height: 28, borderRadius: radii.pill },
   btn: {
     borderWidth: 1,
     paddingHorizontal: 14,
     paddingVertical: 12,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: radii.md,
   },
-  btnText: { fontSize: 12, fontWeight: "800", letterSpacing: 1.4 },
+  btnText: { fontSize: 12, fontWeight: "700", letterSpacing: 0.4 },
   sectionTitle: {
     fontSize: 13,
-    letterSpacing: 2,
-    fontWeight: "700",
+    letterSpacing: 0.2,
+    fontWeight: "600",
     marginTop: spacing.lg,
   },
   catRow: {
     flexDirection: "row",
     borderWidth: 1,
     overflow: "hidden",
+    borderRadius: radii.lg,
   },
-  catColorBlock: { width: 8 },
-  catName: { fontSize: fontSize.lg, fontWeight: fontWeight.bold, letterSpacing: -0.5 },
-  catMeta: { fontSize: 10, letterSpacing: 1.5, fontWeight: "700", marginTop: 4 },
+  catColorBlock: { width: 6 },
+  catName: { fontSize: fontSize.lg, fontWeight: fontWeight.semibold, letterSpacing: -0.3 },
+  catMeta: { fontSize: 11, letterSpacing: 0.2, fontWeight: "500", marginTop: 4 },
   barBg: { height: 4, marginTop: 10, width: "100%" },
   barFill: { height: 4 },
   catActions: {

@@ -15,34 +15,30 @@ export default function TabsLayout() {
         tabBarActiveTintColor: colors.accentPrimary,
         tabBarInactiveTintColor: colors.textSecondary,
         tabBarLabelStyle: {
-          fontSize: 9,
-          fontWeight: "700",
-          letterSpacing: 1.2,
-          textTransform: "uppercase",
+          fontSize: 10,
+          fontWeight: "600",
+          letterSpacing: 0.2,
           marginTop: 2,
         },
         tabBarStyle: {
           backgroundColor: colors.surface,
           borderTopWidth: 1,
-          borderTopColor: colors.border,
+          borderTopColor: colors.borderSoft,
           height: Platform.OS === "ios" ? 84 : 64,
           paddingTop: 8,
           paddingBottom: Platform.OS === "ios" ? 28 : 8,
+          elevation: 0,
         },
         tabBarIcon: ({ color, focused }) => {
           const map: Record<string, keyof typeof Ionicons.glyphMap> = {
-            index: focused ? "grid" : "grid-outline",
-            tasks: focused ? "list" : "list-outline",
-            categories: focused ? "albums" : "albums-outline",
+            index: focused ? "home" : "home-outline",
+            tasks: focused ? "checkbox" : "checkbox-outline",
+            categories: focused ? "folder" : "folder-outline",
             stats: focused ? "stats-chart" : "stats-chart-outline",
             settings: focused ? "settings" : "settings-outline",
           };
           const name = map[route.name] || "ellipse-outline";
-          return (
-            <View style={[styles.iconWrap, focused && { borderColor: colors.accentPrimary }]}>
-              <Ionicons name={name} size={20} color={color} />
-            </View>
-          );
+          return <Ionicons name={name} size={22} color={color} />;
         },
       })}
     >
@@ -55,13 +51,4 @@ export default function TabsLayout() {
   );
 }
 
-const styles = StyleSheet.create({
-  iconWrap: {
-    width: 36,
-    height: 28,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "transparent",
-  },
-});
+const styles = StyleSheet.create({});

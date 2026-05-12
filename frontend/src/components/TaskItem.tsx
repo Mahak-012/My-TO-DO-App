@@ -12,7 +12,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { useTheme } from "../context/ThemeContext";
 import { useTasks, Task } from "../context/TaskContext";
-import { spacing, fontSize, fontWeight } from "../constants/theme";
+import { spacing, fontSize, fontWeight, radii } from "../constants/theme";
 
 interface Props {
   task: Task;
@@ -20,7 +20,7 @@ interface Props {
   onEdit?: (task: Task) => void;
 }
 
-const priorityLabel = (p: Task["priority"]) => p.toUpperCase();
+const priorityLabel = (p: Task["priority"]) => p[0].toUpperCase() + p.slice(1);
 
 export const TaskItem: React.FC<Props> = ({ task, index, onEdit }) => {
   const { colors } = useTheme();
@@ -107,7 +107,7 @@ export const TaskItem: React.FC<Props> = ({ task, index, onEdit }) => {
             <View style={[styles.tag, { borderColor: colors.borderSoft }]}>
               <View style={[styles.tagDot, { backgroundColor: category.color }]} />
               <Text style={[styles.tagText, { color: colors.textSecondary }]} numberOfLines={1}>
-                {category.name}
+                {category.name.toLowerCase()}
               </Text>
             </View>
           )}
@@ -161,9 +161,10 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
     minHeight: 76,
     overflow: "hidden",
+    borderRadius: radii.lg,
   },
   priorityStrip: {
-    width: 4,
+    width: 3,
   },
   body: {
     flex: 1,
@@ -177,9 +178,10 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   checkbox: {
-    width: 24,
-    height: 24,
+    width: 22,
+    height: 22,
     borderWidth: 2,
+    borderRadius: radii.sm,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -192,24 +194,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 6,
-    paddingLeft: 40,
+    paddingLeft: 38,
   },
   tag: {
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
     borderWidth: 1,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: radii.pill,
   },
   tagDot: {
     width: 6,
     height: 6,
+    borderRadius: 3,
   },
   tagText: {
     fontSize: 10,
-    letterSpacing: 1,
-    textTransform: "uppercase",
+    letterSpacing: 0.3,
     fontWeight: "600",
   },
   actions: {

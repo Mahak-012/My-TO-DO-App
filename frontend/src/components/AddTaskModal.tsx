@@ -15,7 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Animated, { FadeIn, SlideInDown } from "react-native-reanimated";
 import { useTheme } from "../context/ThemeContext";
 import { useTasks, Task, Priority } from "../context/TaskContext";
-import { spacing, fontSize, fontWeight } from "../constants/theme";
+import { spacing, fontSize, fontWeight, radii } from "../constants/theme";
 
 interface Props {
   visible: boolean;
@@ -310,6 +310,9 @@ const styles = StyleSheet.create({
     width: "100%",
     alignSelf: "center",
     marginBottom: 0,
+    borderTopLeftRadius: radii.xl,
+    borderTopRightRadius: radii.xl,
+    overflow: "hidden",
   },
   header: {
     flexDirection: "row",
@@ -320,14 +323,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   label: {
-    fontSize: 12,
-    letterSpacing: 2,
+    fontSize: 11,
+    letterSpacing: 0.4,
     fontWeight: "700",
   },
   fieldLabel: {
-    fontSize: 10,
-    letterSpacing: 2,
-    fontWeight: "700",
+    fontSize: 11,
+    letterSpacing: 0.4,
+    fontWeight: "600",
     marginBottom: 8,
   },
   input: {
@@ -335,6 +338,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingVertical: 12,
     fontSize: fontSize.md,
+    borderRadius: radii.md,
   },
   row: {
     flexDirection: "row",
@@ -342,10 +346,11 @@ const styles = StyleSheet.create({
   },
   choice: {
     borderWidth: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 9,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: radii.pill,
   },
   footer: {
     flexDirection: "row",
@@ -359,10 +364,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: radii.md,
   },
   btnText: {
     fontSize: 13,
     fontWeight: fontWeight.bold,
-    letterSpacing: 1.5,
+    letterSpacing: 0.3,
   },
 });

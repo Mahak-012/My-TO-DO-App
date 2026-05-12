@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, { FadeIn } from "react-native-reanimated";
 import { useTheme } from "../context/ThemeContext";
-import { spacing, fontSize, fontWeight } from "../constants/theme";
+import { spacing, fontSize, fontWeight, radii } from "../constants/theme";
 
 interface Props {
   icon?: keyof typeof Ionicons.glyphMap;
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     gap: spacing.md,
     marginTop: spacing.lg,
+    borderRadius: radii.lg,
   },
   iconBox: {
     width: 56,
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: radii.pill,
   },
   title: {
     fontSize: fontSize.lg,

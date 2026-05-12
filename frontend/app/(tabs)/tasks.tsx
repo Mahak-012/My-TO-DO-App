@@ -16,7 +16,7 @@ import { useTasks, Task, Priority } from "../../src/context/TaskContext";
 import { TaskItem } from "../../src/components/TaskItem";
 import { AddTaskModal } from "../../src/components/AddTaskModal";
 import { EmptyState } from "../../src/components/EmptyState";
-import { spacing, fontSize, fontWeight } from "../../src/constants/theme";
+import { spacing, fontSize, fontWeight, radii } from "../../src/constants/theme";
 
 type StatusFilter = "all" | "pending" | "done";
 type PriorityFilter = "all" | Priority;
@@ -170,7 +170,7 @@ export default function TasksScreen() {
           </ScrollView>
 
           <Text style={[styles.count, { color: colors.textSecondary }]}>
-            {filtered.length} {filtered.length === 1 ? "TASK" : "TASKS"}
+            {filtered.length} {filtered.length === 1 ? "task" : "tasks"}
           </Text>
         </Animated.View>
 
@@ -215,15 +215,16 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   title: {
-    fontSize: 44,
+    fontSize: 30,
     fontWeight: fontWeight.black,
-    letterSpacing: -2,
-    lineHeight: 46,
+    letterSpacing: -0.8,
+    lineHeight: 34,
   },
   addBtn: {
-    width: 44,
-    height: 44,
-    borderWidth: 1,
+    width: 40,
+    height: 40,
+    borderWidth: 0,
+    borderRadius: radii.md,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -234,6 +235,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 12,
     paddingVertical: 10,
+    borderRadius: radii.md,
   },
   searchInput: {
     flex: 1,
@@ -248,13 +250,14 @@ const styles = StyleSheet.create({
   },
   chip: {
     borderWidth: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
     paddingVertical: 6,
+    borderRadius: radii.pill,
   },
   chipText: {
-    fontSize: 10,
-    letterSpacing: 1.4,
-    fontWeight: "700",
+    fontSize: 11,
+    letterSpacing: 0.4,
+    fontWeight: "600",
   },
   divider: {
     width: 1,
@@ -262,8 +265,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   count: {
-    fontSize: 10,
-    letterSpacing: 2,
-    fontWeight: "700",
+    fontSize: 11,
+    letterSpacing: 0.4,
+    fontWeight: "600",
   },
 });

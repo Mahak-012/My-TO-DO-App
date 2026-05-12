@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useTheme } from "../../src/context/ThemeContext";
 import { useTasks } from "../../src/context/TaskContext";
-import { spacing, fontSize, fontWeight } from "../../src/constants/theme";
+import { spacing, fontSize, fontWeight, radii } from "../../src/constants/theme";
 
 const DAY_LABELS = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -82,7 +82,7 @@ export default function StatsScreen() {
           style={[styles.heroCard, { borderColor: colors.border, backgroundColor: colors.surface }]}
         >
           <View style={{ flex: 1 }}>
-            <Text style={[styles.heroLabel, { color: colors.textSecondary }]}>COMPLETION RATE</Text>
+            <Text style={[styles.heroLabel, { color: colors.textSecondary }]}>Completion rate</Text>
             <Text style={[styles.heroValue, { color: colors.accentPrimary }]}>{stats.pct}%</Text>
             <Text style={[styles.heroSub, { color: colors.textSecondary }]}>
               {stats.done} of {stats.total} done
@@ -90,7 +90,7 @@ export default function StatsScreen() {
           </View>
           <View style={[styles.divider, { backgroundColor: colors.border }]} />
           <View style={{ flex: 1 }}>
-            <Text style={[styles.heroLabel, { color: colors.textSecondary }]}>STREAK</Text>
+            <Text style={[styles.heroLabel, { color: colors.textSecondary }]}>Streak</Text>
             <Text style={[styles.heroValue, { color: colors.textPrimary }]}>
               {stats.streak}
               <Text style={{ fontSize: 20 }}>d</Text>
@@ -106,7 +106,7 @@ export default function StatsScreen() {
           entering={FadeInUp.delay(180).duration(380)}
           style={[styles.card, { borderColor: colors.border, backgroundColor: colors.surface }]}
         >
-          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>LAST 7 DAYS</Text>
+          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>Last 7 days</Text>
           <Text style={[styles.cardTitle, { color: colors.textPrimary }]}>
             {stats.counts.reduce((a, b) => a + b, 0)} tasks completed
           </Text>
@@ -123,9 +123,10 @@ export default function StatsScreen() {
                     style={[
                       styles.bar,
                       {
-                        height: Math.max(2, h),
+                        height: Math.max(4, h),
                         width: barWidth,
-                        backgroundColor: isToday ? colors.accentPrimary : colors.textPrimary,
+                        backgroundColor: isToday ? colors.accentPrimary : colors.borderSoft,
+                        borderRadius: radii.sm,
                       },
                     ]}
                   />
@@ -143,12 +144,12 @@ export default function StatsScreen() {
           entering={FadeInUp.delay(240).duration(380)}
           style={[styles.card, { borderColor: colors.border, backgroundColor: colors.surface }]}
         >
-          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>BY PRIORITY</Text>
+          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>By priority</Text>
           <View style={{ gap: 10, marginTop: 8 }}>
             {[
-              { k: "high", label: "HIGH", color: colors.priorityHigh, v: stats.byPriority.high },
-              { k: "medium", label: "MEDIUM", color: colors.priorityMedium, v: stats.byPriority.medium },
-              { k: "low", label: "LOW", color: colors.priorityLow, v: stats.byPriority.low },
+              { k: "high", label: "High", color: colors.priorityHigh, v: stats.byPriority.high },
+              { k: "medium", label: "Medium", color: colors.priorityMedium, v: stats.byPriority.medium },
+              { k: "low", label: "Low", color: colors.priorityLow, v: stats.byPriority.low },
             ].map((r) => {
               const max = Math.max(1, stats.byPriority.high, stats.byPriority.medium, stats.byPriority.low);
               const w = (r.v / max) * 100;
@@ -172,7 +173,7 @@ export default function StatsScreen() {
           entering={FadeInUp.delay(300).duration(380)}
           style={[styles.card, { borderColor: colors.border, backgroundColor: colors.surface }]}
         >
-          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>BY CATEGORY</Text>
+          <Text style={[styles.fieldLabel, { color: colors.textSecondary }]}>By category</Text>
           <View style={{ gap: 10, marginTop: 8 }}>
             {stats.byCat.length === 0 ? (
               <Text style={{ color: colors.textSecondary, fontSize: 13 }}>No categories.</Text>
@@ -184,7 +185,7 @@ export default function StatsScreen() {
                   <View key={c.id}>
                     <View style={styles.barRowHead}>
                       <Text style={[styles.barRowLabel, { color: colors.textPrimary }]}>
-                        {c.name.toUpperCase()}
+                        {c.name}
                       </Text>
                       <Text style={[styles.barRowVal, { color: colors.textSecondary }]}>
                         {c.done}/{c.total}
@@ -209,22 +210,23 @@ export default function StatsScreen() {
 const styles = StyleSheet.create({
   safe: { flex: 1 },
   scroll: { padding: spacing.lg, gap: spacing.md, paddingBottom: 100 },
-  eyebrow: { fontSize: 10, letterSpacing: 2, fontWeight: "700", marginBottom: 4 },
-  title: { fontSize: 44, fontWeight: fontWeight.black, letterSpacing: -2, lineHeight: 46 },
+  eyebrow: { fontSize: 11, letterSpacing: 0.4, fontWeight: "600", marginBottom: 4 },
+  title: { fontSize: 30, fontWeight: fontWeight.black, letterSpacing: -0.8, lineHeight: 34 },
   heroCard: {
     flexDirection: "row",
     borderWidth: 1,
     padding: spacing.md,
     marginTop: spacing.md,
     gap: spacing.md,
+    borderRadius: radii.lg,
   },
   divider: { width: 1, alignSelf: "stretch" },
-  heroLabel: { fontSize: 10, letterSpacing: 2, fontWeight: "700" },
-  heroValue: { fontSize: 56, fontWeight: "900", letterSpacing: -3, lineHeight: 60, marginTop: 4 },
-  heroSub: { fontSize: 11, letterSpacing: 1.2, marginTop: 4 },
-  card: { borderWidth: 1, padding: spacing.md },
-  fieldLabel: { fontSize: 10, letterSpacing: 2, fontWeight: "700" },
-  cardTitle: { fontSize: 22, fontWeight: "800", letterSpacing: -1, marginTop: 6, marginBottom: 16 },
+  heroLabel: { fontSize: 10, letterSpacing: 1.4, fontWeight: "700" },
+  heroValue: { fontSize: 40, fontWeight: "800", letterSpacing: -1.4, lineHeight: 44, marginTop: 6 },
+  heroSub: { fontSize: 11, letterSpacing: 0.4, marginTop: 4 },
+  card: { borderWidth: 1, padding: spacing.md, borderRadius: radii.lg },
+  fieldLabel: { fontSize: 11, letterSpacing: 0.4, fontWeight: "600" },
+  cardTitle: { fontSize: 18, fontWeight: "700", letterSpacing: -0.4, marginTop: 6, marginBottom: 16 },
   chart: {
     flexDirection: "row",
     alignItems: "flex-end",
@@ -232,11 +234,11 @@ const styles = StyleSheet.create({
     minHeight: 180,
   },
   bar: {},
-  barCount: { fontSize: 10, fontWeight: "700" },
-  barLabel: { fontSize: 10, letterSpacing: 1, fontWeight: "700" },
+  barCount: { fontSize: 10, fontWeight: "600" },
+  barLabel: { fontSize: 10, letterSpacing: 0.2, fontWeight: "600" },
   barRowHead: { flexDirection: "row", justifyContent: "space-between", marginBottom: 4 },
-  barRowLabel: { fontSize: 11, letterSpacing: 1.4, fontWeight: "700" },
-  barRowVal: { fontSize: 11, fontWeight: "700" },
-  hbarBg: { height: 8, width: "100%" },
-  hbarFill: { height: 8 },
+  barRowLabel: { fontSize: 12, letterSpacing: 0.2, fontWeight: "600" },
+  barRowVal: { fontSize: 12, fontWeight: "600" },
+  hbarBg: { height: 8, width: "100%", borderRadius: radii.pill },
+  hbarFill: { height: 8, borderRadius: radii.pill },
 });
