@@ -1,0 +1,103 @@
+{
+  "theme_and_archetype": {
+    "domain": "Productivity / Task Management",
+    "theme": "Dual Mode (Light & Dark Toggle Required)",
+    "archetype": "Archetype 4 (Swiss & High-Contrast)",
+    "vibe": "Objective, rigid, highly functional. 'Editorial Swiss Poster meets Productivity Dashboard'. It must scream 'Top 1% UI/UX Developer'."
+  },
+  "colors": {
+    "light": {
+      "background": "#F9F9F7",
+      "surface": "#FFFFFF",
+      "surface_secondary": "#F0F0EE",
+      "text_primary": "#111111",
+      "text_secondary": "#555555",
+      "border": "#111111",
+      "border_soft": "#E0E0E0",
+      "accent_primary": "#FF3B30",
+      "accent_secondary": "#007AFF",
+      "priority_high": "#FF3B30",
+      "priority_medium": "#FF9500",
+      "priority_low": "#34C759"
+    },
+    "dark": {
+      "background": "#0A0A0A",
+      "surface": "#141414",
+      "surface_secondary": "#1C1C1C",
+      "text_primary": "#F5F5F5",
+      "text_secondary": "#A0A0A0",
+      "border": "#333333",
+      "border_soft": "#1F1F1F",
+      "accent_primary": "#E2FF3D",
+      "accent_secondary": "#007AFF",
+      "priority_high": "#FF453A",
+      "priority_medium": "#FF9F0A",
+      "priority_low": "#32D74B"
+    }
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Cabinet Grotesk, sans-serif",
+      "body": "Outfit, sans-serif",
+      "mono_labels": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter leading-none",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-semibold",
+      "body": "text-base font-normal leading-relaxed",
+      "small_label": "text-xs font-medium uppercase tracking-[0.2em]"
+    }
+  },
+  "spacing_and_layout": {
+    "philosophy": "Generous Spacing, Optical Alignment, The Control Room Grid for Stats",
+    "bento_grid": "For the stats dashboard, use a dense 'Control Room' grid layout (gap-4 or gap-6). Ensure full height matching.",
+    "containers": "All containers/cards must have hard 1px borders (border-black in light mode, border-[#333] in dark mode). Avoid rounded-full except for purely circular avatars.",
+    "border_radius": "Sharp edges (rounded-none) or very subtle (rounded-sm/max 4px). Avoid default 8px radii to distinguish the brand.",
+    "shadows": {
+      "light": "Hard drop shadows (e.g., 4px 4px 0px #000) for interactive floating elements (FABs, Active Drag items).",
+      "dark": "Subtle neon/white glows or strict 1px border highlights. Avoid heavy diffuse shadows."
+    }
+  },
+  "components": {
+    "checkbox": "Oversized (24x24 or 32x32), sharp corners, 2px border. Active state fills with accent color and uses a hard-edged vector checkmark. Include strikethrough animation on the associated task text.",
+    "buttons": "Rectangular, sharp, high contrast. Primary CTA is Accent Background with inverted text. Hover state must invert colors or apply a hard translation (-translate-y-1) with a hard drop shadow.",
+    "cards": "Flat surfaces. For task items, use 1px bottom border for list view, or full 1px border for grid view. Hovering a task should reveal action icons (edit/delete) elegantly.",
+    "navigation": "Bottom tab bar for mobile: floating 'Crystal Glass' pill shape (backdrop-blur-xl). Active tab inverts its background.",
+    "inputs": "No native browser styling. Use 1px border, stark backgrounds, JetBrains Mono for dates/times.",
+    "charts": "For the productivity chart, use a monochrome bar or line chart with Accent color highlights. Keep it flat, no gradients."
+  },
+  "motion_and_interactions": {
+    "philosophy": "Snappy, spring-based, rigid but alive. High stiffness, low damping.",
+    "transitions": "Use layout transitions on task complete/delete. Staggered lists entrance animations.",
+    "drag_and_drop": "Active dragged item gets a hard shadow and scales up slightly (scale: 1.02, rotate: 2deg).",
+    "swipe_actions": "Swipe right to complete (green background reveals behind), Swipe left to delete (red background reveals behind) with haptic feedback concept."
+  },
+  "icons_and_assets": {
+    "library": "@expo/vector-icons (Phosphor or Feather style preferred if configurable, else stick to clean geometries).",
+    "usage": "Use icons sparingly. Pair them with mono labels."
+  },
+  "media_urls": {
+    "onboarding_hero": {
+      "url": "https://images.unsplash.com/photo-1755018237309-bb3f5efeb2c4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwYXJjaGl0ZWN0dXJlJTIwYmxhY2slMjBhbmQlMjB3aGl0ZXxlbnwwfHx8fDE3Nzg1NTk2NzB8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Minimalist architectural geometric lines, perfectly suited for the empty state / onboarding screen of a Swiss-designed productivity app.",
+      "category": "hero_empty_state"
+    },
+    "stats_background_abstract": {
+      "url": "https://images.unsplash.com/photo-1540409164571-025bed610fc2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMG1vZGVybiUyMGFydCUyMG1pbmltYWxpc3RpY3xlbnwwfHx8fDE3Nzg1NTk2NzB8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Clear glass cube shelves. Good for subtle visual texture or placeholder for user profile background.",
+      "category": "texture_background"
+    }
+  },
+  "testing": {
+    "data_testid_requirements": "All interactive elements MUST include a data-testid attribute in kebab-case (e.g., data-testid='add-task-button', data-testid='task-checkbox-1')."
+  },
+  "instructions_to_main_agent": [
+    "This is a frontend-only portfolio piece using local storage.",
+    "Since the target is Expo (Web + Mobile), ensure responsive layouts using standard Flex/Grid equivalents.",
+    "Implement a robust Dark/Light theme toggle context.",
+    "Implement Drag & Drop or Swipe gestures for tasks to show high technical competence.",
+    "Do NOT use soft 'SaaS' styles (no Inter font, no heavy purple gradients, no large border radii). Stick strictly to the Swiss/Brutalist high-contrast guidelines provided.",
+    "Ensure all micro-interactions (strikethrough on complete, staggered list entrance) are implemented."
+  ]
+}
