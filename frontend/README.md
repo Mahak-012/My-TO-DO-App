@@ -1,5 +1,28 @@
 # Welcome to your Expo app 👋
 
+# My To-Do App ✨
+
+Hi! I'm Mahak, a frontend developer learning React Native. 
+This is my advanced To-Do app project — built as part of my portfolio.
+
+## What I learned building this:
+- React Native + Expo file-based routing
+- Context API for state management  
+- AsyncStorage for data persistence
+- Reanimated animations
+- Cross-platform development (iOS + Android + Web)
+
+## Why I built it:
+I wanted a beautiful, professional task manager that works 
+everywhere — phone, tablet, and browser. So I built one!
+
+## Tech used:
+- Expo SDK 54
+- React Native
+- TypeScript
+- Expo Router
+- React Native Reanimated
+0
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## Get started
